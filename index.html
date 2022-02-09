@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+
+        <style>
+            #message-container {
+                width: 500px;
+                height: 500px;
+
+                background-color: #777;
+
+            }
+
+            body, html {
+                margin: 0;
+                padding: 0;
+
+                box-sizing: border-box;
+
+                display: flex;
+
+                justify-content: center;
+                align-items: center;
+
+                flex-direction: column;
+
+                height: 100vh;
+
+            }
+
+            button {
+                padding: 10px 20px;
+
+                background-color: blue;
+
+                color: #FFF;
+
+            }
+
+            ul {
+                list-style: none;
+
+            }
+        </style>
+
+    </head>
+    <body>
+        <div id="app">
+            <div id="message-container">
+
+    
+            </div>
+    
+            <button id="import">
+                import
+            </button>
+        </div>
+
+        <script>
+            const items = Object.keys(new Array(10).fill(null)).map(Number);
+
+            const container = $("#message-block"); 
+            container.hide();
+
+            // Vue.createApp({
+            //     data() {
+            //         return {
+
+            //         }
+
+            //     }
+            // }).mount("#app");
+
+            function createWindow () {
+                return new Vue({
+                    el: "#message-container",
+                    template: "<div id='message-block'>"+ 
+                                "<button id=\"ok\">" +
+                                    "ok" +
+                                "</button>" +
+                    
+                                "<ul id=\"list\">" +
+                                    "<li v-for=\"(num, index) in number\" :key=\"index\"> {{ num }} </li>" + 
+                                "</ul>" +
+                              "</div>",
+                    data () {
+                        return {
+                            number: items
+
+                        }
+
+                    }
+
+                });
+
+            }
+
+            createWindow();
+
+            $("#import").click(() => {
+                // const ul = $("#list");
+                // $("li").remove();
+
+                // items.reverse().forEach(item => {
+                //     var li = $("<li>" + item + "</li>");
+
+                //     console.log(li);
+
+                //     ul.append(li);
+
+                // });
+
+                // console.log(ul.children());
+                items.reverse();
+                $("#message-block").show();
+
+            });
+
+            $("#ok").click(() => {
+                $("#message-block").hide();
+
+            });
+
+        </script>
+    </body>
+</html>
